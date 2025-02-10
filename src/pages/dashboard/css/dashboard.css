@@ -1,0 +1,56 @@
+/* Top Navigation Bar */
+.topbar {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    padding: 10px 20px;
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+}
+
+/* Centering the Logo */
+.topbar img {
+    max-height: 100px;
+    width: auto;
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+/* Right Side Content */
+.topbar .right_top {
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+}
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px; /* Below the top bar */
+    width: 200px;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: lightblue;
+    padding: 15px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #666;
+}
+
+/* Main Content */
+.content {
+    margin-left: 220px; /* Space for sidebar */
+    margin-top: 80px; /* Space for top bar */
+    padding: 20px;
+}
