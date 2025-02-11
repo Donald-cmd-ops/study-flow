@@ -5,24 +5,18 @@ import NavBarComponent from '../dashboard/navBarComponent';
 import SidebarComponent from '../dashboard/sideBarComponenet';
 import './css/forum.css'
 import { Thread } from '../../classObjects/thread';
-import { query, collection, where, onSnapshot } from 'firebase/firestore';
+import { query, collection, where, onSnapshot, addDoc } from 'firebase/firestore';
 import { db } from '../../Firebase';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Forum() {
-    const [posts, setPosts] = useState([
-        { id: 1, title: "Best study techniques?", author: "Alice", replies: 2 },
-        { id: 2, title: "How to stay focused while studying?", author: "Bob", replies: 5 }
-    ]);
 
     const [newPost, setNewPost] = useState("");
     const [threadPosts, setThreadsPosted] = useState([]);
+    const navigate = useNavigate();
     
-    const addPost = () => {
-        if (newPost.trim() !== "") {
-            const newPostObj = { id: posts.length + 1, title: newPost, author: "You", replies: 0 };
-            setPosts([...posts, newPostObj]);
-            setNewPost("");
-        }
+    const addPost = async () => {
+        navigate('/forum/post');
     };
 
     useEffect(() => {
@@ -58,12 +52,6 @@ function Forum() {
 
                 {/* New Post Input */}
                 <div className="new-post">
-                    <input 
-                        type="text" 
-                        placeholder="Start a discussion..." 
-                        value={newPost} 
-                        onChange={(e) => setNewPost(e.target.value)} 
-                    />
                     <button onClick={addPost}>Post</button>
                 </div>
 

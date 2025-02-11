@@ -9,6 +9,7 @@ import Dashboard from './pages/dashboard/dashboard'
 import Forum from './pages/Forum/forum'
 import Quizzlets from './pages/Quizzlets/quizzlets'
 import Tasks from './pages/Tasks/tasks'
+import ForumPost from './pages/Forum/post_page'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
         <Route path="/forum" element={<Forum />} /> 
         <Route path="/quizzlets" element={<Quizzlets />} /> 
         <Route path="/tasks" element={<Tasks />} /> 
+        <Route path="/forum/post" element={<ForumPost />} /> 
       </Routes>
     </Router>
   )
