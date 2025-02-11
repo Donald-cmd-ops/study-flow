@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../dashboard/css/dashboard.css';
 import studyFlowImage from '../../assets/Study FLOW-3.png';
 import NavBarComponent from '../dashboard/navBarComponent';
 import SidebarComponent from '../dashboard/sideBarComponenet';
 import './css/forum.css'
+import { Thread } from '../../classObjects/thread';
+import { query, collection, where, onSnapshot } from 'firebase/firestore';
+import { db } from '../../Firebase';
 
 function Forum() {
     const [posts, setPosts] = useState([
@@ -12,6 +15,7 @@ function Forum() {
     ]);
 
     const [newPost, setNewPost] = useState("");
+    const [threadPosts, setThreadsPosted] = useState([]);
     
     const addPost = () => {
         if (newPost.trim() !== "") {
@@ -20,6 +24,25 @@ function Forum() {
             setNewPost("");
         }
     };
+
+    useEffect(() => {
+        const q = query(collection(db, "threads"));
+      
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const threadList = [];
+          querySnapshot.forEach((doc) => {
+            //threadList.push(doc.data().name);
+            //uid, title, description, replies
+            const data = doc.data();
+            threadList.push(new Thread(doc.id, data.title, data.description, data.replies, data.author));
+          });
+          setThreadsPosted(threadList);
+          console.log("Current cities in CA: ", threadList);
+        });
+      
+        return () => unsubscribe(); 
+      }, []);
+      
 
     return (
         <div className="dashboard-container">
@@ -46,10 +69,10 @@ function Forum() {
 
                 {/* Discussion List */}
                 <div className="forum-posts">
-                    {posts.map((post) => (
-                        <div key={post.id} className="forum-post">
-                            <h3>{post.title}</h3>
-                            <p>By {post.author} • {post.replies} replies</p>
+                    {threadPosts.map((thread) => (
+                        <div key={thread.uid} className="forum-post">
+                            <h3>{thread.title}</h3>
+                            <p>Posted by {}</p>
                             <button>View Discussion</button>
                         </div>
                     ))}
