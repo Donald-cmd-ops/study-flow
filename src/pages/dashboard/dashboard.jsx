@@ -3,8 +3,12 @@ import './css/dashboard.css';
 import studyFlowImage from '../../assets/Study FLOW-3.png';
 import NavBarComponent from './navBarComponent';
 import SidebarComponent from './sideBarComponenet';
+import { useNavigate } from 'react-router-dom';
+import { checkIfSignedIn } from '../../Firebase';
 
 function Dashboard() {
+    const navigate = useNavigate();
+    checkIfSignedIn(navigate);
     return (
         <div className="dashboard-container">
             {/* Top Navigation Bar */}

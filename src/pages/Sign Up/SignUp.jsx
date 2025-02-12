@@ -1,7 +1,7 @@
 import './css/sign_up.css';
 import { useState } from 'react';
 import StudyFlowLogo from "../../assets/Study FLOW-2.png";
-import { registerWithEmail } from "../../Firebase";
+import { registerWithEmail, checkIfSignedIn } from "../../Firebase";
 import { useNavigate } from 'react-router-dom';
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ function SignUp() {
     }
     
 }
+checkIfSignedIn(navigate);
     return (
         <div className="signup_page">
         <form onSubmit={onSubmit}>
