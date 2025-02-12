@@ -19,6 +19,10 @@ function Forum() {
         navigate('/forum/post');
     };
 
+    const viewThread = async (threadID) => {
+        navigate('/forum/'+threadID);
+    };
+
     checkIfSignedIn(navigate); 
 
     useEffect(() => {
@@ -66,7 +70,7 @@ function Forum() {
                         <div key={thread.uid} className="forum-post">
                             <h3>{thread.title}</h3>
                             <p>Posted by {}</p>
-                            <button>View Discussion</button>
+                            <button onClick={() => viewThread(thread.uid)}>View Discussion</button>
                         </div>
                     ))}
                 </div>
