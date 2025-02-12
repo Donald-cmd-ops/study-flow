@@ -2,14 +2,16 @@ import './css/sign_up.css';
 import { useState } from 'react';
 import StudyFlowLogo from "../../assets/Study FLOW-2.png";
 import { registerWithEmail } from "../../Firebase";
+import { useNavigate } from 'react-router-dom';
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeat_password, setRepeatPassword] = useState("");
+  const navigate = useNavigate();
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password === repeat_password) {
-      registerWithEmail(email, password);
+      registerWithEmail(email, password, navigate);
     }else{
       console.log("Passwords Do Not Match");
     }

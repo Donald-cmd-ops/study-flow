@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./css/sign_in.css"; 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StudyFlowLogo from "../../assets/Study FLOW-2.png";
 import { isMobile } from "react-device-detect";
 import ImageDisplay from "./ImageDisplay";
@@ -10,6 +10,7 @@ const LoginFormDisplay = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -21,7 +22,7 @@ const LoginFormDisplay = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    loginWithEmail(email, password);
+    loginWithEmail(email, password, navigate);
 }
 
   if (isMobile) {

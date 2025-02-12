@@ -6,7 +6,7 @@ import SidebarComponent from '../dashboard/sideBarComponenet';
 import './css/forum.css'
 import { Thread } from '../../classObjects/thread';
 import { query, collection, where, onSnapshot, addDoc } from 'firebase/firestore';
-import { db } from '../../Firebase';
+import { db, checkIfSignedIn } from '../../Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Forum() {
@@ -19,7 +19,12 @@ function Forum() {
         navigate('/forum/post');
     };
 
+    checkIfSignedIn(navigate); 
+
     useEffect(() => {
+
+        
+
         const q = query(collection(db, "threads"));
       
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
