@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Quizzlets() {
     const navigate = useNavigate();
-    checkIfSignedIn(navigate);
+
     return (
         <div className="dashboard-container">
             {/* Top Navigation Bar */}

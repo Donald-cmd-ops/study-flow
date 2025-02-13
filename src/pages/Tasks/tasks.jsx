@@ -8,7 +8,7 @@ import { checkIfSignedIn } from '../../Firebase';
 
 function Tasks() {
     const navigate = useNavigate();
-    checkIfSignedIn(navigate);
+
     return (
         <div className="dashboard-container">
             {/* Top Navigation Bar */}

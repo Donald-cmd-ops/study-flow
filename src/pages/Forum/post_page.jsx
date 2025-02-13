@@ -16,14 +16,14 @@ function ForumPost() {
     const [subject, setSubject] = useState("");
     const navigate = useNavigate();
 
-    checkIfSignedIn(navigate);
 
     const addPost = async () => {
         if (newPostTitle.trim() !== "" && newPostDescription.trim() !== "") {
             try {
                 await addDoc(collection(db, "threads"), {
                     title: newPostTitle,
-                    description: newPostDescription
+                    description: newPostDescription,
+                    replies: []
                 });
                 setNewPost(""); // Clear input after posting
             } catch (error) {

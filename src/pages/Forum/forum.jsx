@@ -23,8 +23,6 @@ function Forum() {
         navigate('/forum/'+threadID);
     };
 
-    checkIfSignedIn(navigate); 
-
     useEffect(() => {
 
         

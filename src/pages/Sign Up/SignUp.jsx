@@ -1,29 +1,46 @@
 import './css/sign_up.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StudyFlowLogo from "../../assets/Study FLOW-2.png";
 import { registerWithEmail, checkIfSignedIn } from "../../Firebase";
 import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeat_password, setRepeatPassword] = useState("");
+  const [fullname, setFullname] = useState("");
   const navigate = useNavigate();
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password === repeat_password) {
-      registerWithEmail(email, password, navigate);
+      registerWithEmail(email, password, fullname, navigate);
     }else{
       console.log("Passwords Do Not Match");
     }
     
 }
-checkIfSignedIn(navigate);
+const auth = getAuth();
+  useEffect(()=>{
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid);
+        navigate('/dashboard');
+      } 
+    });
+    return () => unsub();
+  },[auth, navigate]);
     return (
         <div className="signup_page">
         <form onSubmit={onSubmit}>
         <div className="login_form">
         <img src={StudyFlowLogo} />
           <h1>Sign Up</h1>
+
+          <div className="input_box">
+            <label htmlFor="fullname">Full Name</label>
+            <input type="text" id="fullname" placeholder="Enter Full address" onChange={(e) => setFullname(e.target.value)} required />
+          </div>
 
           {/* Email input box */}
           <div className="input_box">
