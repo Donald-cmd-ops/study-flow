@@ -11,6 +11,7 @@ import Quizzlets from './pages/Quizzlets/quizzlets'
 import Tasks from './pages/Tasks/tasks'
 import ForumPost from './pages/Forum/post_page'
 import Discussion from './pages/Forum/discussion'
+import AddTask from './pages/Tasks/addTask'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
         <Route path="/tasks" element={<Tasks />} /> 
         <Route path="/forum/post" element={<ForumPost />} /> 
         <Route path="/forum/:threadID" element={<Discussion />} />
+        <Route path="/tasks/add" element={<AddTask />} />
       </Routes>
     </Router>
   )
