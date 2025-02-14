@@ -10,7 +10,7 @@ import './css/tasks_main.css'
 function Tasks() {
     const navigate = useNavigate();
     const addTask = () => {
-        navigate('/addTasks');
+        navigate('/tasks/add');
     };
 
     return (
@@ -27,7 +27,7 @@ function Tasks() {
 
                 {/* New Post Input */}
                 <div className="new-post">
-                    <button>Add Task</button>
+                    <button onClick={()=>addTask()}>Add Task</button>
                 </div>
 
                 {/* Discussion List */}
