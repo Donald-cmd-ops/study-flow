@@ -35,6 +35,28 @@
     background-color: #f9f9f9;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    width : 100%;
+    gap: 10px;
+  }
+
+.grid-column {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    aspect-ratio: 1;
+    width: 100%;
+}
+
 .post-header {
     display: flex;
     justify-content: space-between;

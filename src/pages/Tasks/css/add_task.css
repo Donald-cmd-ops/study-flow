@@ -36,6 +36,13 @@
     width: 25%;
     margin-top: 6px;
   }
+
+  .col-50 {
+    float: left;
+    width: 45%;
+    margin-top: 6px;
+    margin-right: 5%;
+  }
   
   .col-75 {
     float: left;
@@ -57,3 +64,4 @@
       margin-top: 0;
     }
   }
+

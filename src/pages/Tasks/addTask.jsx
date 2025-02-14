@@ -9,6 +9,8 @@ import NavBarComponent from "../dashboard/navBarComponent";
 import SidebarComponent from "../dashboard/sideBarComponenet";
 import "./css/tasks_main.css";
 import "./css/add_task.css";
+import { auth } from "../../Firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 function AddTask() {
     const [newPostTitle, setNewPostTitle] = useState("");
@@ -17,14 +19,33 @@ function AddTask() {
     const [country, setCountry] = useState("australia");
     const [subject, setSubject] = useState("");
     const [addedMilestones, setMilestones] = useState([]);
+    const [newMilestone, setNewMilestone] = useState("");
     const navigate = useNavigate();
 
     const addMilestone = () => {
-        setMilestones([...addedMilestones, "Grapes"]); 
+        if(newMilestone.trim() != "") {
+            setMilestones([...addedMilestones, newMilestone]); 
+            setNewMilestone("");
+        }
     };
     
     const addTask = async () => {
-        navigate("/tasks/add");
+        if(newPostTitle.trim() != "") {
+            try {
+                await addDoc(collection(db, "tasks"), {
+                    user: auth.currentUser.uid,
+                    title: newPostTitle,
+                    milestone: addedMilestones,
+                    completed: Array(addedMilestones.length).fill(false)
+                });
+                    setNewPost(""); 
+                } catch (error) {
+                    console.error("Error adding document: ", error);
+                }
+            navigate("/tasks");
+        }else{
+            console.log("Error occured");
+        }
     };
 
     return (
@@ -50,7 +71,7 @@ function AddTask() {
                                 <input
                                     type="text"
                                     id="postTitle"
-                                    placeholder="Enter Title"
+                                    placeholder="Enter Task Name"
                                     value={newPostTitle}
                                     onChange={(e) => setNewPostTitle(e.target.value)}
                                 />
@@ -58,9 +79,19 @@ function AddTask() {
                         </div>
 
                         <div className="row">
-                            <div className="col-75">
+                            <div className="col-25">
                                 <label htmlFor="postDescription">Add Milestones</label>
                             </div>
+                            <div className="col-50">
+                            <input
+                                    type="text"
+                                    id="postTitle"
+                                    placeholder="Enter Milestone"
+                                    value={newMilestone}
+                                    onChange={(e) => setNewMilestone(e.target.value)}
+                                />
+                            </div>
+
                             <div className="col-25">
                                 <button onClick={addMilestone}>Add</button>
                             </div>
@@ -68,18 +99,29 @@ function AddTask() {
 
                         {/* Sample Forum Post */}
                         <div className="forum-post">
-                            <div className="post-header">
-                                <h3 className="post-title col-75">How to Learn JavaScript?</h3>
-                                <button className="remove-btn col-25" aria-label="Remove post">
-                                    ❌ Remove
-                                </button>
+                            
+                            {addedMilestones.map((milestone, index) => (
+                                <div key={index} className="forum-post">
+                                    <div className="post-header">
+                                    <h3 className="post-title col-75">{milestone}</h3>
+                                    <button className="remove-btn col-25" aria-label="Remove post" onClick={() => {
+                                        setMilestones((prevMilestones) => {
+                                            const updatedMilestones = [...prevMilestones]; 
+                                            updatedMilestones.splice(index, 1); 
+                                            return updatedMilestones; 
+                                        });
+                                    }}>
+                                        ❌ Remove
+                                    </button>
+                                </div>
                             </div>
+                    ))}
                         </div>
                     </form>
 
                     {/* Post Button */}
                     <div className="new-post">
-                        <button type="submit">Post</button>
+                        <button type="submit" onClick={()=>addTask()}>Post</button>
                     </div>
                 </div>
             </div>
