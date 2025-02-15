@@ -57,15 +57,23 @@ function Tasks() {
 
                 {/* Discussion List */}
                 <div className="grid-container">
-
-                            
-                            {retrievedTasks.map((Task, index) => (
-                                <div key={index} className="grid-column">
-                                    <div className="post-header">
-                                    <h3 className="post-title col-75">{Task.title}</h3>
+                            {retrievedTasks.map((Task, index) => {
+                                const completed_count = Task.completed.filter(value => value).length;
+                                return (
+                                    <div key={index} className="grid-column" onClick={
+                                        ()=>{
+                                            navigate('/tasks/'+Task.uid);
+                                        }
+                                    }>
+                                        <div className="post-header">
+                                        <h3 className="post-title col-75">{Task.title}</h3>
+                                    </div>
+                                    <p>{Math.round(((completed_count/Task.completed.length)*100) * 10) / 10}% Completed</p>
+                                    
                                 </div>
-                            </div>
-                    ))}
+                                );
+                            })}
+                            
 
                 </div>
             </div>

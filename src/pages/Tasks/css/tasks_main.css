@@ -55,11 +55,13 @@
     background-color: #ffffff;
     aspect-ratio: 1;
     width: 100%;
+    
 }
 
 .post-header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5%;
 }
 
 .post-title {
