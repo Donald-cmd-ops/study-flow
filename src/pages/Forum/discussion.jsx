@@ -105,7 +105,9 @@ const Discussion = () => {
             <h3>Replies</h3>
 
             {retrievedThread.replies.map((comment, index) => (
-                        <p key={index}>{comment}</p>
+                <div key={index} className='reply-post'><p>{comment}</p></div>
+
+                        
                     ))}
 
             {/* Other Comments */}
