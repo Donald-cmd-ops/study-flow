@@ -8,6 +8,7 @@ const SidebarComponent = () => {
         <div className="sidebar">
                 <Link to="/dashboard">Home</Link>
                 <Link to="/tasks">Tasks</Link>
+                <Link to="/logger">Logger</Link>
                 <Link to="/quizzlets">Quizzlets</Link>
                 <Link to="/forum">Forum</Link>
             </div>

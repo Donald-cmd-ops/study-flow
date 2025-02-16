@@ -11,8 +11,14 @@ import "./css/tasks_main.css";
 import "./css/add_task.css";
 import { auth } from "../../Firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import DatePicker from "react-datepicker";
 
 function AddTask() {
+    const today = new Date().toISOString().split("T")[0];
+    const [pickedDate, setPickedDate] = useState(today);
+
+
+
     const [newPostTitle, setNewPostTitle] = useState("");
     const [newPostDescription, setNewPostDescription] = useState("");
     const [lastName, setLastName] = useState("");
@@ -36,7 +42,8 @@ function AddTask() {
                     user: auth.currentUser.uid,
                     title: newPostTitle,
                     milestone: addedMilestones,
-                    completed: Array(addedMilestones.length).fill(false)
+                    completed: Array(addedMilestones.length).fill(false),
+                    dueDate : pickedDate
                 });
                     setNewPost(""); 
                 } catch (error) {
@@ -79,6 +86,14 @@ function AddTask() {
                         </div>
 
                         <div className="row">
+                        <div className="col-25">
+                                <label htmlFor="duedate">Due Date</label>
+                            </div>
+                            {/*date picker here*/}
+                            <input className='col-75' type="date" id="duedate" name="duedate" value={pickedDate} onChange={(e) => setPickedDate(e.target.value)} />
+                        </div>
+
+                        <div className="row">
                             <div className="col-25">
                                 <label htmlFor="postDescription">Add Milestones</label>
                             </div>
@@ -96,6 +111,8 @@ function AddTask() {
                                 <button onClick={addMilestone}>Add</button>
                             </div>
                         </div>
+
+                        
 
                         {/* Sample Forum Post */}
                         <div className="forum-post">

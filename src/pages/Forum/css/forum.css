@@ -71,3 +71,7 @@
     margin: 5px 0;
     color: gray;
 }
+
+.dicussion-form-header {
+    justify-content: space-between;
+}

@@ -28,7 +28,8 @@ function Tasks() {
                 user: data.user,
                 title: data.title,
                 milestone: data.milestone,
-                completed: data.completed
+                completed: data.completed,
+                dueDate : data.dueDate
             });
           });
           setRetrievedTasks(list);
@@ -68,6 +69,7 @@ function Tasks() {
                                         <div className="post-header">
                                         <h3 className="post-title col-75">{Task.title}</h3>
                                     </div>
+                                    <p>Due Date : {Task.dueDate ? Task.dueDate : "Unknown"}</p>
                                     <p>{Math.round(((completed_count/Task.completed.length)*100) * 10) / 10}% Completed</p>
                                     
                                 </div>

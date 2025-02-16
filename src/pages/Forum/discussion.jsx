@@ -104,11 +104,13 @@ const Discussion = () => {
 
             <h3>Replies</h3>
 
-            {retrievedThread.replies.map((comment, index) => (
-                <div key={index} className='reply-post'><p>{comment}</p></div>
+            {retrievedThread.replies.map((comment, index) => { 
+                const comment_split = comment.split(':');
+                return (
+                <div key={index} className='reply-post'><h5>{comment_split[0]}</h5><p>{comment_split[1]}</p></div>
 
                         
-                    ))}
+                    );})}
 
             {/* Other Comments */}
         </div>

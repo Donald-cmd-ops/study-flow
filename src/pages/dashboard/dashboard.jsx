@@ -19,8 +19,7 @@ function Dashboard() {
 
             {/* Main Content */}
             <div className="content">
-                <h2>Welcome to My Website</h2>
-                <p>This is the main content area.</p>
+                <h2>Here is a graph of your productivity over the 7 days</h2>
             </div>
         </div>
     );

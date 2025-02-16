@@ -84,7 +84,15 @@ const TaskView = () => {
 
     {/* Main Content */}
     <div className="forum-content">
+        <div className="dicussion-form-header">
         <h2 style={{ marginBottom: '15px' }}>{retrievedTask.title}</h2>
+        <div>
+        <a style={{marginRight:'5%'}}>Edit</a>
+        <a>Delete</a>
+        </div>
+        
+        </div>
+        
         {retrievedTask.milestone.map((milestone, index) => (
                                 <label key={index} class="checkbox-container" 
                                     onChange={()=>{
