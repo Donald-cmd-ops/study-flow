@@ -54,3 +54,7 @@
     margin-top: 80px; /* Space for top bar */
     padding: 20px;
 }
+
+.content h2 {
+    margin-bottom: 20px;
+}

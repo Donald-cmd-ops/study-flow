@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { query, collection, addDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { query, collection, addDoc, doc, onSnapshot, updateDoc, deleteDoc} from "firebase/firestore";
 import { db, checkIfSignedIn } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 import "../dashboard/css/dashboard.css";
@@ -21,6 +21,8 @@ const TaskView = () => {
   const [comment, setComment] = useState("");
   const [userFullName, setUserFullName] = useState("");
   const auth = getAuth();
+
+  const navigate = useNavigate();
 
   const updateCompleted = () => {
       const taskDocRef = doc(db, 'tasks', taskID);
@@ -58,6 +60,17 @@ const TaskView = () => {
     .catch((error) => console.error("Comment unable to be added successfully", error));
   };
 
+  const deleteDocument = async () => {
+    const taskRef = doc(db, "tasks", taskID); 
+    try {
+      await deleteDoc(taskRef);
+      navigate('/tasks');
+    }catch(e){
+      console.log('Following error occured while trying to delete document :',e);
+    }
+    
+  };
+
 
   if (isLoading) {
     return <div className="dashboard-container">
@@ -88,7 +101,7 @@ const TaskView = () => {
         <h2 style={{ marginBottom: '15px' }}>{retrievedTask.title}</h2>
         <div>
         <a style={{marginRight:'5%'}}>Edit</a>
-        <a>Delete</a>
+        <a onClick={()=>deleteDocument()}>Delete</a>
         </div>
         
         </div>
