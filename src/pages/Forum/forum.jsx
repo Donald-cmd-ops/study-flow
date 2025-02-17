@@ -67,7 +67,7 @@ function Forum() {
                     {threadPosts.map((thread) => (
                         <div key={thread.uid} className="forum-post">
                             <h3>{thread.title}</h3>
-                            <p>Posted by {}</p>
+                            <p>Posted by <b>{thread.author}</b></p>
                             <button onClick={() => viewThread(thread.uid)}>View Discussion</button>
                         </div>
                     ))}

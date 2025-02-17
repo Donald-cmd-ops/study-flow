@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { query, collection, addDoc } from "firebase/firestore";
-import { db, checkIfSignedIn } from "../../Firebase";
+import React, { useEffect, useState } from "react";
+import { query, collection, addDoc, where, getDocs } from "firebase/firestore";
+import { db, checkIfSignedIn,auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 import "../dashboard/css/dashboard.css";
 import "./css/forum.css";
@@ -14,7 +14,29 @@ function ForumPost() {
     const [lastName, setLastName] = useState("");
     const [country, setCountry] = useState("australia");
     const [subject, setSubject] = useState("");
+    const [userName, setUserFullName] = useState("");
     const navigate = useNavigate();
+
+    const getUserName = async (userID) => {
+        try{
+            const q = query(collection(db, "users"), where("user_id", "==", userID));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+            console.log(doc.data().fullname);
+            setUserFullName(doc.data().fullname);
+        });
+        }catch (error){
+            console.error("Error fetching user name:", error);
+        }
+        
+      };
+
+    useEffect(()=>{
+        if(auth.currentUser){
+            getUserName(auth.currentUser.uid);
+        }
+        
+    },[auth.currentUser]);
 
 
     const addPost = async () => {
@@ -23,7 +45,8 @@ function ForumPost() {
                 await addDoc(collection(db, "threads"), {
                     title: newPostTitle,
                     description: newPostDescription,
-                    replies: []
+                    replies: [],
+                    author : userName
                 });
                 setNewPost(""); // Clear input after posting
             } catch (error) {
