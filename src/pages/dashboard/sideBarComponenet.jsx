@@ -11,6 +11,8 @@ const SidebarComponent = () => {
                 <Link to="/logger">Logger</Link>
                 <Link to="/quizzlets">Quizzlets</Link>
                 <Link to="/forum">Forum</Link>
+                <Link to="/draw">Doddle Wall</Link>
+                <Link to="/notes">Notes</Link>
             </div>
     );
   };

@@ -1,8 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
+import ColorPicker from 'react-pick-color';
 
 const Canvas = () => {
   const canvasRef = useRef(null);
+  const [color, setColor] = useState('#fff');
+  const [openColorPicker, setOpenColorPicker] = useState(false);
+  const getBtnName = () => {
+    if (openColorPicker) {
+        return "Close Color Picker"
+    }
+    return "Open Color Picker"
+  }
 
   const handleExportImage = async () => {
     if (canvasRef.current) {
@@ -20,11 +29,21 @@ const Canvas = () => {
 
   return (
     <div style={{height: "100vh", display: "flex", flexDirection: "column"}}>
-      <h2>Sketch Canvas</h2>
+      <h2>Doddle Wall</h2>
+      <button onClick={()=>{
+        if (openColorPicker == false) {
+            setOpenColorPicker(true);
+        }else{
+            setOpenColorPicker(false);
+        }
+      }}>{getBtnName()}</button>
+      {openColorPicker && (
+        <ColorPicker color={color} onChange={color => setColor(color.hex)} />
+      )}
       <ReactSketchCanvas 
         ref={canvasRef}
         strokeWidth={4} 
-        strokeColor="black"
+        strokeColor={color}
         width="100%"
         height="80%"
       />

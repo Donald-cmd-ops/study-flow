@@ -17,6 +17,7 @@
     "react-datepicker": "^8.0.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0",
+    "react-pick-color": "^2.0.0",
     "react-router-dom": "^7.1.5",
     "react-sketch-canvas": "^6.2.0"
   },
