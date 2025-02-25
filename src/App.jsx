@@ -14,6 +14,7 @@ import Discussion from './pages/Forum/discussion'
 import AddTask from './pages/Tasks/addTask'
 import TaskView from './pages/Tasks/taskView'
 import Logger from './pages/producitivty_logger/logger'
+import Draw from './pages/drawing/drawing_board' 
 
 function App() {
   const [count, setCount] = useState(0)
@@ -35,6 +36,7 @@ function App() {
         <Route path="/tasks/add" element={<AddTask />} />
         <Route path="/tasks/:taskID" element={<TaskView />} />
         <Route path="/logger" element={<Logger />} />
+        <Route path="/draw" element={<Draw />} />
       </Routes>
     </Router>
   )
